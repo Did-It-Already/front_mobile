@@ -7,6 +7,7 @@ import MyContext from './context';
 import FirstPage from './pages/firstPage';
 import Register from './pages/register';
 import Login from './pages/login';
+import MainPage from './pages/mainPage';
 
 import { useFonts } from 'expo-font';
 
@@ -46,6 +47,7 @@ function App() {
           <Stack.Screen name="Inicio" component={FirstPage} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Main" component={MainPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </MyContext.Provider>

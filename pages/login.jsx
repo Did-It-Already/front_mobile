@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { View, Text,ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
 import MyContext from '../context';
 
 import Header from '../components/Header';
@@ -11,7 +12,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { theme } = useContext(MyContext);
-  const navigation = useNavigation(); // Initialize the navigation hook
+  const navigation = useNavigation();
 
   // Sends the received information to the server
   const handleSubmit = () => {

@@ -1,9 +1,11 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { View, Text,ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
 import MyContext from '../context';
 
 import Header from '../components/Header';
+
 import styles from '../assets/styles';
 
 function Register() {

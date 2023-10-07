@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
 import MyContext from '../context';
 
 import Header from '../components/Header';
+
 import styles from '../assets/styles';
 
 function FirstPage() {

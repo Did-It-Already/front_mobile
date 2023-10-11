@@ -8,36 +8,57 @@ import Header from '../components/Header';
 
 import styles from '../assets/styles';
 
+import { setAccessToken, setRefreshToken , saveTheme,getUserInfo,getHabits,getTasks} from '../assets/functions';
+import { API } from '../assets/constants';
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { theme } = useContext(MyContext);
+  const { theme, setCurrentUser, setCurrentHabits, setCurrentTasks} = useContext(MyContext);
   const navigation = useNavigation();
 
   // Sends the received information to the server
-  const handleSubmit = () => {
-    const body = {
-      email: email,
-      password: password,
-    };
+  function handleSubmit() {
+      const mutation = `
+          mutation {
+              login(user: {
+                  email: "${email}"
+                  password: "${password}"
+              }) {
+                  access
+                  refresh
+                  status
+              }
+          }
+      `;
 
-    alert(JSON.stringify(body));
-
-    fetch('http://127.0.0.1:8000/users/', {
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify(body), // Make sure to send JSON data
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
+      fetch(API, {
+          method: 'POST',
+          mode: "cors",
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({query: mutation}),
+      })
       .then((response) => response.json())
       .then((result) => {
-        if (result.user_id) {
-          alert('Usuario creado correctamente');
-        }
-      });
-  };
+          if(!result.errors){
+            var access = result.data.login.access
+            var refresh = result.data.login.refresh
+            setAccessToken(access);
+            setRefreshToken(refresh);
+            getUserInfo(access).then((userData) => {
+                setCurrentUser(userData)
+                saveTheme(userData.theme);
+            })
+            getHabits(access).then((habits) => {setCurrentHabits(habits)})
+            getTasks(access).then((tasks) => {setCurrentTasks(tasks)})
+            navigation.navigate('Main');
+          }else{
+            alert("Usuario o contraseña incorrectos.")
+          }
+      });  
+    };
 
   return (
     <ScrollView contentContainerStyle={[styles.backgroundContainer, theme === 'light' ? styles.backgroundContainerLight:styles.backgroundContainerDark]}>
@@ -68,7 +89,7 @@ function Login() {
         />
 
         <TouchableOpacity
-          onPress={handleSubmit}
+          onPress={()=>handleSubmit()}
           style={[styles.button2, theme === 'light' ? styles.button2Light:styles.button2Dark]}
         >
           <Text style={styles.buttonText}>ingresar</Text>

@@ -24,12 +24,16 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       margin:0,
       backgroundColor: '#FF7A00',
+      alignItems:'center'
     },
     button1light: {
       backgroundColor: '#FF7A00',
     },
     button1Dark: {
       backgroundColor: 'white',
+    },
+    button1Red: {
+      backgroundColor: 'rgb(170, 33, 12)',
     },
     button2: {
       borderRadius: 10,
@@ -81,6 +85,42 @@ const styles = StyleSheet.create({
       paddingHorizontal: 10, 
       paddingVertical: 30,
     },
+    formContainer2: {
+      borderRadius: 15,
+      width: 330,
+      height: 600,
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      paddingHorizontal: 10, 
+      paddingVertical: 30,
+      marginTop:15
+    },
+    text4container: {
+      width: 330,
+      height: 480,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop:0,
+      margin: 0,
+    },
+    text5container: {
+      width: 300,
+      flexDirection:'column',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      margin: 0
+    },
+    text4: {
+      fontSize: 20,
+      color: 'white',
+      fontFamily: 'LeagueSpartan-Bold',
+    },
+    text6: {
+      fontSize: 20,
+      color: 'white',
+      fontFamily: 'LeagueSpartan-Bold',
+      marginTop:15
+    },
     formContainerLight: {
       backgroundColor: '#FF7A00',
     }, 
@@ -93,12 +133,26 @@ const styles = StyleSheet.create({
       color: 'white',
       fontFamily: 'LeagueSpartan-Bold',
     },
+    inputTextEmail: {
+      fontSize: 20,
+      margin: 0,
+      color: 'white',
+      fontFamily: 'LeagueSpartan-Regular',
+      marginBottom:13
+    },
     inputField: {
       fontSize: 20,
       height: 35,
       width: '90%',
       borderRadius: 5,
       paddingHorizontal: 10,
+      marginTop: 5,
+      marginBottom: 15,
+      backgroundColor: 'white',
+      fontFamily: 'LeagueSpartan-Regular',
+    },
+    inputFieldDate: {
+      height: 35,
       marginTop: 5,
       marginBottom: 15,
       backgroundColor: 'white',
@@ -140,7 +194,8 @@ const styles = StyleSheet.create({
       margin: 0,
       position: 'relative',
       color: 'white',
-      backgroundColor: 'black'
+      backgroundColor: 'black',
+      marginBottom:15
     },
 
     userImage: {
@@ -171,14 +226,28 @@ const styles = StyleSheet.create({
       width: 50,
       height: 50,
       padding: 0,
-      borderRadius: 10,
-      flexDirection: 'row',
+      alignContent:'center',
+      justifyContent:'center',
+      alignItems:'center',
+      backgroundColor: 'rgba(0,0,0,0.35)',
+      borderRadius:8,
+      marginBottom:5,
+    },
+    userEditButtons: {
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
       position: 'absolute',
       top: 20,
       right: 20,
-      backgroundColor: 'rgba(0,0,0,0.35)'
+      zIndex: 2
+    },
+
+    twoButtonsContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width:220
     },
 
     sectionTitle: {
@@ -187,6 +256,97 @@ const styles = StyleSheet.create({
       fontSize: 28,
       fontFamily: 'LeagueSpartan-Bold',
     },
+
+    sectionTitle2: {
+      color: 'white',
+      marginTop: 10,
+      fontSize: 28,
+      fontFamily: 'LeagueSpartan-Bold',
+      alignContent:'center',
+      textAlign:'center',
+      width:230      
+    },
+
+    sectionTitle3: {
+      color: 'white',
+      marginTop: 0,
+      marginBottom: 10,
+      fontSize: 28,
+      fontFamily: 'LeagueSpartan-Bold',
+    },
+
+    taskSectionTitleContainer: {
+      flexDirection: 'row',
+      fontSize: 28,
+      fontFamily: 'LeagueSpartan-Bold',
+      width:270,
+      justifyContent:'space-between',
+      marginBottom:5
+    },
+
+
+    goBackButton: {
+      width: 40,
+      height: 40,
+      padding: 0,
+      alignContent:'center',
+      justifyContent:'center',
+      alignItems:'center',
+      backgroundColor: 'rgba(0,0,0,0.35)',
+      borderRadius:8,
+      marginBottom:5,
+    },
+
+    addButton: {
+      width: 40,
+      height: 40,
+      padding: 0,
+      alignContent:'center',
+      justifyContent:'center',
+      alignItems:'center',
+      backgroundColor: 'rgba(0,0,0,0.35)',
+      borderRadius:8,
+      marginBottom:5,
+      position:'absolute',
+      top:20,
+      right:20
+    },
+
+    addButtonLight: {
+      width: 40,
+      height: 40,
+      padding: 0,
+      justifyContent:'center',
+      alignItems:'center',
+      borderRadius:8,
+      position:'absolute',
+      top:20,
+      right:20
+    },
+
+    addButtonDark: {
+      backgroundColor:'white'
+    },
+
+    addButtonLight: {
+      backgroundColor: 'rgba(0,0,0,0.35)'
+    },
+
+    addButtonText:{
+      padding: 0,
+      marginTop:3,
+      fontSize: 45,
+      fontFamily: 'LeagueSpartan-Bold',
+    },
+
+    addButtonTextLight:{
+      color:'white'
+    },
+
+    addButtonTextDark:{
+      color:'black'
+    },
+    
 
     userNameContainer: {
       height: '75%',
@@ -294,6 +454,80 @@ const styles = StyleSheet.create({
       fontSize: 40,
       fontFamily: 'LeagueSpartan-Bold',
       color: '#FF7A00',
+    },
+
+    taskCard: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems:'center',
+      paddingVertical: 20,
+      paddingHorizontal: 10,
+      width:'100%',
+      borderRadius: 5,
+      marginBottom: 10,
+    },
+    dark: {
+      backgroundColor: 'rgba(0,0,0,0.35)',
+      color: 'white'
+    },
+    light: {
+      backgroundColor: 'rgba(255,255,255,0.6)',
+      color: 'black'
+    },
+  
+    dark2: {
+      color: 'white'
+    },
+    light2: {
+      color: 'black'
+    },
+    taskMainContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    taskCheckbox: {
+      width: 30,
+      height: 30,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius:5,
+      borderWidth: 3,
+    },
+    taskCheckboxLight: {
+      borderColor: 'white',
+    },
+    taskCheckboxDark: {
+      borderColor: 'black',
+    },
+    taskTextContainer: {
+      marginLeft: 10,
+      width:160,
+    },
+    taskCardTitle: {
+      fontSize: 20,
+      fontFamily: 'LeagueSpartan-Bold'
+    },
+    taskCardDescription: {
+      fontSize: 17,
+      fontFamily: 'LeagueSpartan-Regular'
+    },
+    taskCardDate: {
+      fontSize: 17,
+      fontFamily: 'LeagueSpartan-Regular'
+    },
+    taskEditButtonsContainer: {
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    taskEditButton: {
+      marginBottom: 5,
+      padding:5,
+      backgroundColor:'rgba(255,255,255,0.2)',
+      borderRadius:5,
+    },
+    taskEditIcon: {
+      width: 25,
+      height: 25,
     }
 
   });

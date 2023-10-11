@@ -8,12 +8,19 @@ import Header from '../components/Header';
 
 import styles from '../assets/styles';
 
+import { loggedInUser } from '../assets/functions';
+
 function FirstPage() {
   const { theme } = useContext(MyContext);
   const navigation = useNavigation(); 
 
-  const handleNavigation = () => {
-    navigation.navigate('Login');
+  const handleNavigation = async () => {
+    const isLoggedIn = await loggedInUser();
+    if(!isLoggedIn){
+      navigation.navigate('Login');
+    }else{
+      navigation.navigate('Main');
+    }
   };
 
   return (

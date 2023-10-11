@@ -6,19 +6,20 @@ import MyContext from '../context';
 import Header from '../components/Header';
 import UserSection from '../components/UserSection';
 import CalendarSection from '../components/CalendarSection';
+import TasksSection from "../components/TasksSection.jsx";
 
-import { user } from '../assets/constants';
 import styles from '../assets/styles';
 
 function MainPage() {
-
-  const { theme } = useContext(MyContext);
+  const {theme, currentHabits, currentTasks, currentUser} = useContext(MyContext)
 
   return (
     <ScrollView contentContainerStyle={[styles.backgroundContainer, theme === 'light' ? styles.backgroundContainerLight:styles.backgroundContainerDark]}>
         <Header />
-        <UserSection user={user} />
-        <CalendarSection user={user} /> 
+        <UserSection user={currentUser} />
+        <CalendarSection/> 
+        <TasksSection isHabit={false} tasks={currentTasks}/>
+        <TasksSection isHabit={true} tasks={currentHabits}/>
     </ScrollView>
   );
 }

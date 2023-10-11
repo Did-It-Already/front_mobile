@@ -7,6 +7,7 @@ import MyContext from '../context';
 import Header from '../components/Header';
 
 import styles from '../assets/styles';
+import { API } from "../assets/constants.js";
 
 function Register() {
   const [name, setName] = useState('');
@@ -18,50 +19,44 @@ function Register() {
   const { theme, setTheme } = useContext(MyContext);
   const navigation = useNavigation();
 
-  const getName = (text) => {
-    setName(text);
-  };
+  // Sends the received information to the server
+  function handleSubmit() {
+    const mutation = `
+      mutation {
+      register(user: {
+          name: "${name}"
+          last_name: "${lastName}"
+          email: "${email}"
+          password: "${password}"
+          theme: "${theme}"
+      }) {
+          data {
+          user {
+              email
+              user_id
+          }
+          }
+      }
+      }
+  `;
 
-  const getLastName = (text) => {
-    setLastName(text);
-  };
-
-  const getEmail = (text) => {
-    setEmail(text);
-  };
-
-  const getPassword = (text) => {
-    setPassword(text);
-  };
-
-  const getPasswordAgain = (text) => {
-    setPasswordAgain(text);
-  };
-
-  const handleSubmit = () => {
-    const body = {
-      name: name,
-      last_name: lastName,
-      email: email,
-      theme: theme
-    };
-
-    alert(JSON.stringify(body));
-
-    fetch('http://127.0.0.1:8000/users/', {
-      method: 'POST',
-      mode: 'cors',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    fetch(API, {
+        method: 'POST',
+        mode: "cors",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({query: mutation}),
     })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.user_id) {
-          alert('Usuario creado correctamente');
-        }
-      });
+    .then((response) => response.json())
+    .then((result) => {
+      if(!result.errors){
+        alert("Usuario creado correctamente.")
+        navigation.navigate('Login')
+      }else{
+        alert("Este correo ya está registrado.")
+      }
+    });  
   };
 
   return (
@@ -74,7 +69,7 @@ function Register() {
       <View style={[styles.formContainer, theme === 'light' ? styles.formContainerLight: styles.formContainerDark]}>
         <Text style={styles.inputText}>nombre(s)*</Text>
         <TextInput
-          onChangeText={getName}
+          onChangeText={(text) => setName(text)}
           value={name}
           style={styles.inputField}
           required
@@ -82,7 +77,7 @@ function Register() {
 
         <Text style={styles.inputText}>apellido(s)*</Text>
         <TextInput
-          onChangeText={getLastName}
+          onChangeText={(text) => setLastName(text)}
           value={lastName}
           style={styles.inputField}
           required
@@ -90,7 +85,7 @@ function Register() {
 
         <Text style={styles.inputText}>correo electrónico*</Text>
         <TextInput
-          onChangeText={getEmail}
+          onChangeText={(text) => setEmail(text)}
           value={email}
           style={styles.inputField}
           keyboardType="email-address"
@@ -101,7 +96,7 @@ function Register() {
 
         <Text style={styles.inputText}>contraseña*</Text>
         <TextInput
-          onChangeText={getPassword}
+          onChangeText={(text) => setPassword(text)}
           value={password}
           style={styles.inputField}
           secureTextEntry
@@ -110,7 +105,7 @@ function Register() {
 
         <Text style={styles.inputText}>confirmar contraseña*</Text>
         <TextInput
-          onChangeText={getPasswordAgain}
+          onChangeText={(text) => setPasswordAgain(text)}
           value={passwordAgain}
           style={styles.inputField}
           secureTextEntry

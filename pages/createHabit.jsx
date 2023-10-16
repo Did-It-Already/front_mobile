@@ -22,7 +22,7 @@ function CreateHabit() {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [frequency, setFrequency] = useState("");
+    const [frequency, setFrequency] = useState(1);
 
     // Sends the received information to the server
     const handleSubmit = async () => {

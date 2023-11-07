@@ -23,4 +23,4 @@ export const months = [
    "Diciembre",
 ];
 
-export const API = 'http://192.168.0.13:5000/graphql/'
+export const API = 'http://192.168.0.13:80/graphql/'
